@@ -10,7 +10,7 @@ function App() {
    return (
     <>
       <Router>
-          <Route exact path="/" component={AdminPage} />
+          <Route exact path="/" component={LandingPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/field" component={FieldPage} />   
       </Router> 

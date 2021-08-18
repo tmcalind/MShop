@@ -205,90 +205,91 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
       const objectIdListSelectedGraphicsLayer = new GraphicsLayer();
       mapRef.current.add(objectIdListSelectedGraphicsLayer);
 
-    //   view.whenLayerView(waterMetersFeatureLayer).then(function () {
-    //     objectIdListGraphicsLayer.removeAll();
+      view.whenLayerView(waterMetersFeatureLayer).then(function () {
+        objectIdListGraphicsLayer.removeAll();
 
-    //     if (objectIdList && objectIdList.length > 0) {
-    //       const query = waterMetersFeatureLayer.createQuery();
-    //       query.objectIds = objectIdList;
+        if (objectIdList && objectIdList.length > 0) {
+          const query = waterMetersFeatureLayer.createQuery();
+          query.objectIds = objectIdList;
 
-    //       waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
-    //         const symbolizedFeatureSet = featureSet.features.map((graphic) => {
-    //           let symbolUrl = "./assets/WaterMeter_Marked.png";
+          waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
+            const symbolizedFeatureSet = featureSet.features.map((graphic) => {
+              let symbolUrl = "./mshop/assets/WaterMeter_Marked.png";
 
-    //           if (graphic.attributes.Status === "InService") {
-    //             symbolUrl = "./assets/WaterMeter_InService.png";
-    //           } else if (graphic.attributes.Status === "Letter1") {
-    //             symbolUrl = "./assets/WaterMeter_Letter1.png";
-    //           } else if (graphic.attributes.Status === "Letter2") {
-    //             symbolUrl = "./assets/WaterMeter_Letter2.png";
-    //           } else if (graphic.attributes.Status === "Letter3") {
-    //             symbolUrl = "./assets/WaterMeter_Letter3.png";
-    //           }
+              if (graphic.attributes.Status === "InService") {
+                symbolUrl = "./mshop/assets/WaterMeter_InService.png";
+              } else if (graphic.attributes.Status === "Letter1") {
+                symbolUrl = "./mshop/assets/WaterMeter_Letter1.png";
+              } else if (graphic.attributes.Status === "Letter2") {
+                symbolUrl = "./mshop/assets/WaterMeter_Letter2.png";
+              } else if (graphic.attributes.Status === "Letter3") {
+                symbolUrl = "./mshop/assets/WaterMeter_Letter3.png";
+              }
 
-    //           graphic.symbol = {
-    //             type: "picture-marker",
-    //             url: symbolUrl,
-    //             width: "40px",
-    //             height: "25px",
-    //           };
+              graphic.symbol = {
+                type: "picture-marker",
+                url: symbolUrl,
+                width: "40px",
+                height: "25px",
+              };
 
-    //           return graphic;
-    //         });
-    //         objectIdListGraphicsLayer.graphics.addMany(symbolizedFeatureSet);
+              return graphic;
+            });
+            objectIdListGraphicsLayer.graphics.addMany(symbolizedFeatureSet);
 
-    //         // console.log(`waterMetersFeatureLayer.queryFeatures`,featureSet)
+            // console.log(`waterMetersFeatureLayer.queryFeatures`,featureSet)
 
-    //         // Zoom to list items
-    //         // view.goTo(objectIdListGraphicsLayer.graphics).catch((err) => console.log(err));
-    //       });
-    //     }
+            // Zoom to list items
+            // view.goTo(objectIdListGraphicsLayer.graphics).catch((err) => console.log(err));
+          });
+        }
 
-    //     objectIdListSelectedGraphicsLayer.removeAll();
-    //     if (objectIdListSelected && objectIdListSelected.length > 0) {
-    //       const query = waterMetersFeatureLayer.createQuery();
+        objectIdListSelectedGraphicsLayer.removeAll();
+        
+        if (objectIdListSelected && objectIdListSelected.length > 0) {
+          const query = waterMetersFeatureLayer.createQuery();
 
-    //       query.objectIds = objectIdListSelected;
+          query.objectIds = objectIdListSelected;
 
-    //       waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
-    //         const symbolizedFeatureSet = featureSet.features.map((graphic) => {
-    //           graphic.symbol = {
-    //             type: "simple-marker",
-    //             style: "diamond",
-    //             size: 10,
-    //             color: "red",
-    //           };
+          waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
+            const symbolizedFeatureSet = featureSet.features.map((graphic) => {
+              graphic.symbol = {
+                type: "simple-marker",
+                style: "diamond",
+                size: 10,
+                color: "red",
+              };
 
-    //           return graphic;
-    //         });
+              return graphic;
+            });
 
-    //         objectIdListSelectedGraphicsLayer.graphics.addMany(
-    //           symbolizedFeatureSet
-    //         );
-    //       });
-    //     }
+            objectIdListSelectedGraphicsLayer.graphics.addMany(
+              symbolizedFeatureSet
+            );
+          });
+        }
 
-    //     view.on("click", function (event) {
-    //       view.hitTest(event).then(function (event) {
-    //         if (event.results) {
-    //           event.results.forEach(function (result) {
-    //             if (result.graphic.layer.name === "WaterMeters") {
-    //               const attribs = result.graphic.attributes;
-    //               dispatch(setObjectId(attribs.OBJECTID));
+        view.on("click", function (event) {
+          view.hitTest(event).then(function (event) {
+            if (event.results) {
+              event.results.forEach(function (result) {
+                if (result.graphic.layer.name === "WaterMeters") {
+                  const attribs = result.graphic.attributes;
+                  dispatch(setObjectId(attribs.OBJECTID));
 
-    //               dispatch(
-    //                 setCenterscale({
-    //                   longitude: view.center.longitude,
-    //                   latitude: view.center.latitude,
-    //                   scale: view.scale,
-    //                 })
-    //               );
-    //             }
-    //           });
-    //         }
-    //       });
-    //     });
-    //   });
+                  dispatch(
+                    setCenterscale({
+                      longitude: view.center.longitude,
+                      latitude: view.center.latitude,
+                      scale: view.scale,
+                    })
+                  );
+                }
+              });
+            }
+          });
+        });
+      });
     }
   }, [
     objectIdList,

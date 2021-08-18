@@ -5,17 +5,23 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {
   createTheme,
   ThemeProvider,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core/styles";
-import Card from '@material-ui/core/Card'
+import Card from "@material-ui/core/Card";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import MainAppBar from "../Components/MainAppBar";
-import MeterMap from '../Components/MeterMap'
+import MeterMap from "../Components/MeterMap";
+import MeterList from "../Components/MeterList";
 
-import { streetsMapConfig, streetsWideMapConfig, basemapLondonMapConfig } from "../mapConfigs";
+import {
+  streetsMapConfig,
+  streetsWideMapConfig,
+  basemapLondonMapConfig,
+} from "../mapConfigs";
+import MeterInfo from "../Components/MeterInfo";
 
 const theme = createTheme({
   typography: {
@@ -35,7 +41,7 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     background: {
-      paper: "#e3f2fd",
+      paper: "#cfd8dc",
     },
   },
 });
@@ -70,10 +76,26 @@ const AdminPage = () => {
                 {objectIdList && objectIdList.length > 0 ? (
                   <>
                     <Grid item xs={5}>
-
+                      <Card
+                        className={classes.card}
+                        variant="outlined"
+                        style={{ paddingLeft: "10px" }}
+                      >
+                        <MeterList />
+                      </Card>
                     </Grid>
                     <Grid item xs={7}>
-                    <MeterMap {...streetsMapConfig} />
+                      <Card className={classes.card} variant="outlined">
+                        <MeterInfo />
+                        <Card
+                          className={classes.card}
+                          variant="outlined"
+                          style={{ padding: "5px" }}
+                        >
+                          {" "}
+                          <MeterMap {...streetsMapConfig} />{" "}
+                        </Card>
+                      </Card>
                     </Grid>
                   </>
                 ) : (
@@ -84,7 +106,7 @@ const AdminPage = () => {
                         variant="outlined"
                         style={{ paddingLeft: "10px" }}
                       >
-                        {/* <MeterInfo /> */}
+                        <MeterInfo />
                         <MeterMap {...streetsWideMapConfig} />
                       </Card>
                     </Grid>
