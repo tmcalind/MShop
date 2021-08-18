@@ -9,12 +9,10 @@ function App() {
 
    return (
     <>
-    {/* <AdminPage /> */}
       <Router>
-          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/" component={AdminPage} />
           <Route path="/admin" component={AdminPage} />
-          <Route path="/field" component={FieldPage} />
-          
+          <Route path="/field" component={FieldPage} />   
       </Router> 
     </>
   );

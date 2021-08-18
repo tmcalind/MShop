@@ -67,143 +67,143 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
       const symbolSize = 8;
       const symbolOutlineWidth = 3;
 
-    //   const waterMeterRenderer = new UniqueValueRenderer({
-    //     field: "Status",
-    //     defaultSymbol: { type: "simple-marker" },
-    //     uniqueValueInfos: [
-    //       {
-    //         value: "InService",
-    //         type: "simple",
+      const waterMeterRenderer = new UniqueValueRenderer({
+        field: "Status",
+        defaultSymbol: { type: "simple-marker" },
+        uniqueValueInfos: [
+          {
+            value: "InService",
+            type: "simple",
 
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...inServiceGreen, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...inServiceGreen, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "Marked",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...markedBlue, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...markedBlue, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "Letter1",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...letter1Yellow, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...markedBlue, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "Letter2",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...letter2Orange, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...markedBlue, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "Letter3",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...letter3OrangeRed, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...markedBlue, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "Letter4",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...letter4RedOrange, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...markedBlue, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "ShutoffNotice",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...letter4RedOrange, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...markedBlue, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //       {
-    //         value: "Scheduled",
-    //         type: "simple",
-    //         symbol: {
-    //           type: "simple-marker",
-    //           size: symbolSize,
-    //           color: [...scheduledBlack, symbolOpacity],
-    //           outline: {
-    //             width: symbolOutlineWidth,
-    //             color: [...scheduledBlack, symbolOpacity],
-    //           },
-    //         },
-    //       },
-    //     ],
-    //   });
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...inServiceGreen, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...inServiceGreen, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "Marked",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...markedBlue, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...markedBlue, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "Letter1",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...letter1Yellow, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...markedBlue, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "Letter2",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...letter2Orange, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...markedBlue, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "Letter3",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...letter3OrangeRed, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...markedBlue, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "Letter4",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...letter4RedOrange, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...markedBlue, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "ShutoffNotice",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...letter4RedOrange, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...markedBlue, symbolOpacity],
+              },
+            },
+          },
+          {
+            value: "Scheduled",
+            type: "simple",
+            symbol: {
+              type: "simple-marker",
+              size: symbolSize,
+              color: [...scheduledBlack, symbolOpacity],
+              outline: {
+                width: symbolOutlineWidth,
+                color: [...scheduledBlack, symbolOpacity],
+              },
+            },
+          },
+        ],
+      });
 
-    //   const waterMetersFeatureLayer = new FeatureLayer({
-    //     url: WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
-    //     spatialReference: 26917,
-    //     name: "WaterMeters",
-    //     title: "Water Meters",
-    //     outFields: [
-    //       "OBJECTID",
-    //       "MeterNumber",
-    //       "Manufacturer",
-    //       "MeterType",
-    //       "InstallDate",
-    //       "Status",
-    //       "PremiseAddress",
-    //     ],
-    //     renderer: waterMeterRenderer,
-    //     minScale: 12000,
-    //   });
+      const waterMetersFeatureLayer = new FeatureLayer({
+        url: WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
+        spatialReference: 26917,
+        name: "WaterMeters",
+        title: "Water Meters",
+        outFields: [
+          "OBJECTID",
+          "MeterNumber",
+          "Manufacturer",
+          "MeterType",
+          "InstallDate",
+          "Status",
+          "PremiseAddress",
+        ],
+        renderer: waterMeterRenderer,
+        minScale: 12000,
+      });
 
-    //   mapRef.current.add(waterMetersFeatureLayer);
+      mapRef.current.add(waterMetersFeatureLayer);
 
-    //   const objectIdListGraphicsLayer = new GraphicsLayer();
-    //   mapRef.current.add(objectIdListGraphicsLayer);
+      const objectIdListGraphicsLayer = new GraphicsLayer();
+      mapRef.current.add(objectIdListGraphicsLayer);
 
-    //   const objectIdListSelectedGraphicsLayer = new GraphicsLayer();
-    //   mapRef.current.add(objectIdListSelectedGraphicsLayer);
+      const objectIdListSelectedGraphicsLayer = new GraphicsLayer();
+      mapRef.current.add(objectIdListSelectedGraphicsLayer);
 
     //   view.whenLayerView(waterMetersFeatureLayer).then(function () {
     //     objectIdListGraphicsLayer.removeAll();

@@ -85,7 +85,7 @@ const AdminPage = () => {
                         style={{ paddingLeft: "10px" }}
                       >
                         {/* <MeterInfo /> */}
-                        <MeterMap {...basemapLondonMapConfig} />
+                        <MeterMap {...streetsWideMapConfig} />
                       </Card>
                     </Grid>
                   </>
