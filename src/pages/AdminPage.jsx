@@ -15,7 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import MainAppBar from "../Components/MainAppBar";
 import MeterMap from '../Components/MeterMap'
 
-import { streetsMapConfig, streetsWideMapConfig } from "../mapConfigs";
+import { streetsMapConfig, streetsWideMapConfig, basemapLondonMapConfig } from "../mapConfigs";
 
 const theme = createTheme({
   typography: {
@@ -85,7 +85,7 @@ const AdminPage = () => {
                         style={{ paddingLeft: "10px" }}
                       >
                         {/* <MeterInfo /> */}
-                        <MeterMap {...streetsWideMapConfig} />
+                        <MeterMap {...basemapLondonMapConfig} />
                       </Card>
                     </Grid>
                   </>

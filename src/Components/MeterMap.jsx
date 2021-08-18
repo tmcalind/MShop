@@ -67,228 +67,228 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
       const symbolSize = 8;
       const symbolOutlineWidth = 3;
 
-      const waterMeterRenderer = new UniqueValueRenderer({
-        field: "Status",
-        defaultSymbol: { type: "simple-marker" },
-        uniqueValueInfos: [
-          {
-            value: "InService",
-            type: "simple",
+    //   const waterMeterRenderer = new UniqueValueRenderer({
+    //     field: "Status",
+    //     defaultSymbol: { type: "simple-marker" },
+    //     uniqueValueInfos: [
+    //       {
+    //         value: "InService",
+    //         type: "simple",
 
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...inServiceGreen, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...inServiceGreen, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "Marked",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...markedBlue, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...markedBlue, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "Letter1",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...letter1Yellow, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...markedBlue, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "Letter2",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...letter2Orange, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...markedBlue, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "Letter3",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...letter3OrangeRed, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...markedBlue, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "Letter4",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...letter4RedOrange, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...markedBlue, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "ShutoffNotice",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...letter4RedOrange, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...markedBlue, symbolOpacity],
-              },
-            },
-          },
-          {
-            value: "Scheduled",
-            type: "simple",
-            symbol: {
-              type: "simple-marker",
-              size: symbolSize,
-              color: [...scheduledBlack, symbolOpacity],
-              outline: {
-                width: symbolOutlineWidth,
-                color: [...scheduledBlack, symbolOpacity],
-              },
-            },
-          },
-        ],
-      });
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...inServiceGreen, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...inServiceGreen, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "Marked",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...markedBlue, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...markedBlue, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "Letter1",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...letter1Yellow, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...markedBlue, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "Letter2",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...letter2Orange, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...markedBlue, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "Letter3",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...letter3OrangeRed, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...markedBlue, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "Letter4",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...letter4RedOrange, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...markedBlue, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "ShutoffNotice",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...letter4RedOrange, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...markedBlue, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         value: "Scheduled",
+    //         type: "simple",
+    //         symbol: {
+    //           type: "simple-marker",
+    //           size: symbolSize,
+    //           color: [...scheduledBlack, symbolOpacity],
+    //           outline: {
+    //             width: symbolOutlineWidth,
+    //             color: [...scheduledBlack, symbolOpacity],
+    //           },
+    //         },
+    //       },
+    //     ],
+    //   });
 
-      const waterMetersFeatureLayer = new FeatureLayer({
-        url: WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
-        spatialReference: 26917,
-        name: "WaterMeters",
-        title: "Water Meters",
-        outFields: [
-          "OBJECTID",
-          "MeterNumber",
-          "Manufacturer",
-          "MeterType",
-          "InstallDate",
-          "Status",
-          "PremiseAddress",
-        ],
-        renderer: waterMeterRenderer,
-        minScale: 12000,
-      });
+    //   const waterMetersFeatureLayer = new FeatureLayer({
+    //     url: WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
+    //     spatialReference: 26917,
+    //     name: "WaterMeters",
+    //     title: "Water Meters",
+    //     outFields: [
+    //       "OBJECTID",
+    //       "MeterNumber",
+    //       "Manufacturer",
+    //       "MeterType",
+    //       "InstallDate",
+    //       "Status",
+    //       "PremiseAddress",
+    //     ],
+    //     renderer: waterMeterRenderer,
+    //     minScale: 12000,
+    //   });
 
-      mapRef.current.add(waterMetersFeatureLayer);
+    //   mapRef.current.add(waterMetersFeatureLayer);
 
-      const objectIdListGraphicsLayer = new GraphicsLayer();
-      mapRef.current.add(objectIdListGraphicsLayer);
+    //   const objectIdListGraphicsLayer = new GraphicsLayer();
+    //   mapRef.current.add(objectIdListGraphicsLayer);
 
-      const objectIdListSelectedGraphicsLayer = new GraphicsLayer();
-      mapRef.current.add(objectIdListSelectedGraphicsLayer);
+    //   const objectIdListSelectedGraphicsLayer = new GraphicsLayer();
+    //   mapRef.current.add(objectIdListSelectedGraphicsLayer);
 
-      view.whenLayerView(waterMetersFeatureLayer).then(function () {
-        objectIdListGraphicsLayer.removeAll();
+    //   view.whenLayerView(waterMetersFeatureLayer).then(function () {
+    //     objectIdListGraphicsLayer.removeAll();
 
-        if (objectIdList && objectIdList.length > 0) {
-          const query = waterMetersFeatureLayer.createQuery();
-          query.objectIds = objectIdList;
+    //     if (objectIdList && objectIdList.length > 0) {
+    //       const query = waterMetersFeatureLayer.createQuery();
+    //       query.objectIds = objectIdList;
 
-          waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
-            const symbolizedFeatureSet = featureSet.features.map((graphic) => {
-              let symbolUrl = "./assets/WaterMeter_Marked.png";
+    //       waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
+    //         const symbolizedFeatureSet = featureSet.features.map((graphic) => {
+    //           let symbolUrl = "./assets/WaterMeter_Marked.png";
 
-              if (graphic.attributes.Status === "InService") {
-                symbolUrl = "./assets/WaterMeter_InService.png";
-              } else if (graphic.attributes.Status === "Letter1") {
-                symbolUrl = "./assets/WaterMeter_Letter1.png";
-              } else if (graphic.attributes.Status === "Letter2") {
-                symbolUrl = "./assets/WaterMeter_Letter2.png";
-              } else if (graphic.attributes.Status === "Letter3") {
-                symbolUrl = "./assets/WaterMeter_Letter3.png";
-              }
+    //           if (graphic.attributes.Status === "InService") {
+    //             symbolUrl = "./assets/WaterMeter_InService.png";
+    //           } else if (graphic.attributes.Status === "Letter1") {
+    //             symbolUrl = "./assets/WaterMeter_Letter1.png";
+    //           } else if (graphic.attributes.Status === "Letter2") {
+    //             symbolUrl = "./assets/WaterMeter_Letter2.png";
+    //           } else if (graphic.attributes.Status === "Letter3") {
+    //             symbolUrl = "./assets/WaterMeter_Letter3.png";
+    //           }
 
-              graphic.symbol = {
-                type: "picture-marker",
-                url: symbolUrl,
-                width: "40px",
-                height: "25px",
-              };
+    //           graphic.symbol = {
+    //             type: "picture-marker",
+    //             url: symbolUrl,
+    //             width: "40px",
+    //             height: "25px",
+    //           };
 
-              return graphic;
-            });
-            objectIdListGraphicsLayer.graphics.addMany(symbolizedFeatureSet);
+    //           return graphic;
+    //         });
+    //         objectIdListGraphicsLayer.graphics.addMany(symbolizedFeatureSet);
 
-            // console.log(`waterMetersFeatureLayer.queryFeatures`,featureSet)
+    //         // console.log(`waterMetersFeatureLayer.queryFeatures`,featureSet)
 
-            // Zoom to list items
-            // view.goTo(objectIdListGraphicsLayer.graphics).catch((err) => console.log(err));
-          });
-        }
+    //         // Zoom to list items
+    //         // view.goTo(objectIdListGraphicsLayer.graphics).catch((err) => console.log(err));
+    //       });
+    //     }
 
-        objectIdListSelectedGraphicsLayer.removeAll();
-        if (objectIdListSelected && objectIdListSelected.length > 0) {
-          const query = waterMetersFeatureLayer.createQuery();
+    //     objectIdListSelectedGraphicsLayer.removeAll();
+    //     if (objectIdListSelected && objectIdListSelected.length > 0) {
+    //       const query = waterMetersFeatureLayer.createQuery();
 
-          query.objectIds = objectIdListSelected;
+    //       query.objectIds = objectIdListSelected;
 
-          waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
-            const symbolizedFeatureSet = featureSet.features.map((graphic) => {
-              graphic.symbol = {
-                type: "simple-marker",
-                style: "diamond",
-                size: 10,
-                color: "red",
-              };
+    //       waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
+    //         const symbolizedFeatureSet = featureSet.features.map((graphic) => {
+    //           graphic.symbol = {
+    //             type: "simple-marker",
+    //             style: "diamond",
+    //             size: 10,
+    //             color: "red",
+    //           };
 
-              return graphic;
-            });
+    //           return graphic;
+    //         });
 
-            objectIdListSelectedGraphicsLayer.graphics.addMany(
-              symbolizedFeatureSet
-            );
-          });
-        }
+    //         objectIdListSelectedGraphicsLayer.graphics.addMany(
+    //           symbolizedFeatureSet
+    //         );
+    //       });
+    //     }
 
-        view.on("click", function (event) {
-          view.hitTest(event).then(function (event) {
-            if (event.results) {
-              event.results.forEach(function (result) {
-                if (result.graphic.layer.name === "WaterMeters") {
-                  const attribs = result.graphic.attributes;
-                  dispatch(setObjectId(attribs.OBJECTID));
+    //     view.on("click", function (event) {
+    //       view.hitTest(event).then(function (event) {
+    //         if (event.results) {
+    //           event.results.forEach(function (result) {
+    //             if (result.graphic.layer.name === "WaterMeters") {
+    //               const attribs = result.graphic.attributes;
+    //               dispatch(setObjectId(attribs.OBJECTID));
 
-                  dispatch(
-                    setCenterscale({
-                      longitude: view.center.longitude,
-                      latitude: view.center.latitude,
-                      scale: view.scale,
-                    })
-                  );
-                }
-              });
-            }
-          });
-        });
-      });
+    //               dispatch(
+    //                 setCenterscale({
+    //                   longitude: view.center.longitude,
+    //                   latitude: view.center.latitude,
+    //                   scale: view.scale,
+    //                 })
+    //               );
+    //             }
+    //           });
+    //         }
+    //       });
+    //     });
+    //   });
     }
   }, [
     objectIdList,

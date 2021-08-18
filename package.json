@@ -3,6 +3,7 @@
   "name": "metershop-dev",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://dev-lcyvugei.us.auth0.com",
   "dependencies": {
     "@arcgis/core": "^4.18.1",
     "@auth0/auth0-react": "^1.6.0",
