@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { FiLogIn as LoginIcon, FiLogOut as LogoutIcon } from "react-icons/fi";
 // import QueryDialog from "./QueryDialog";
 // import MeterSearchbar from "./MeterSearchbar";
-// import MeterStatusbar from "./MeterStatusbar";
+import MeterStatusbar from "./MeterStatusbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,7 +72,7 @@ const MainAppBar = ({ title }) => {
           <>
             {isAuthenticated ? (
               <>
-                {/* <MeterStatusbar /> */}
+                <MeterStatusbar />
                 <Card>
                   <CardHeader
                     style={{ padding: "4px" }}

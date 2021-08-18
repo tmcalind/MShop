@@ -6,20 +6,22 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { Auth0Provider } from '@auth0/auth0-react';
 
-const domain = "dev-lcyvugei.us.auth0.com";
-const clientId = "tmWAmjhQbctY6Jv85jkQpp0FERgbSLqp"        // "jOBsoqPwliei6fEOsjsvPz1JRQIucGQx";
-const audience = "https://dev-lcyvugei.us.auth0.com/api/v2/";
-const scope = "read:current_user update:current_user_metadata";
+import { 
+  AUTH0_DOMAIN,
+  AUTH0_CLIENTID,
+  AUTH0_AUDIENCE,
+  AUTH0_SCOPE
+ } from './config'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Auth0Provider
-        domain={domain}
-        clientId={clientId}
+        domain={AUTH0_DOMAIN}
+        clientId={AUTH0_CLIENTID}
         redirectUri={window.location.origin}
-        audience={audience}
-        scope={scope}
+        audience={AUTH0_AUDIENCE}
+        scope={AUTH0_SCOPE}
       >
         <App />
       </Auth0Provider>

@@ -13,7 +13,6 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/field" component={FieldPage} />
-          <Route path="/test" component={FieldPage} />
       </Router> 
     </>
   );
