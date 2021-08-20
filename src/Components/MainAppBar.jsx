@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth, setRoles } from "../slices/userSlice";
 import { useAuth0 } from "@auth0/auth0-react";
 import AppBar from "@material-ui/core/AppBar";
 import { Avatar, Card, CardHeader, Toolbar } from "@material-ui/core";
@@ -11,6 +12,9 @@ import { FiLogIn as LoginIcon, FiLogOut as LogoutIcon } from "react-icons/fi";
 // import QueryDialog from "./QueryDialog";
 // import MeterSearchbar from "./MeterSearchbar";
 import MeterStatusbar from "./MeterStatusbar";
+import * as Cookies from "js-cookie";
+
+import { AUTH0_DOMAIN } from "../config";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,14 +38,86 @@ const useStyles = makeStyles((theme) => ({
 const MainAppBar = ({ title }) => {
   const classes = useStyles();
 
-  const { isAuthenticated, isLoading, user, loginWithRedirect, logout } =
-    useAuth0();
+  const auth = useSelector((state) => state.user.auth);
+  const roles = useSelector((state) => state.user.roles);
 
-//   const [queryDialogOpen, setQueryDialogOpen] = useState(false);
+  console.log('auth, roles', auth, roles)
+
+
+  const dispatch = useDispatch();
+
+  const {
+    isAuthenticated,
+    isLoading,
+    user,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
+
+  const [userMetadata, setUserMetadata] = useState(null);
+
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: `https://${AUTH0_DOMAIN}/api/v2/`,
+          scope: "read:current_user",
+        });
+
+        if (user.sub) {
+          const userDetailsByIdUrl = `https://${AUTH0_DOMAIN}/api/v2/users/${user.sub}`;
+
+          const metadataResponse = await fetch(userDetailsByIdUrl, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+
+          const { user_metadata } = await metadataResponse.json();
+
+          dispatch(setRoles(user_metadata));
+          dispatch(setAuth(user));
+
+          // const cookieContent = { ...user, ...user_metadata };
+          //Cookies.set('MShopAuth', user)
+
+        }
+      } catch (e) {
+        console.log(`useEffect getUserMetadata error: `, e.message);
+      }
+    };
+
+    if (user) {
+      getUserMetadata();
+    }
+    
+  }, [getAccessTokenSilently, user]);
+
+  //   const [queryDialogOpen, setQueryDialogOpen] = useState(false);
+
+  const showProfile = (e, u) => {
+    console.log("showProfile click", e, u, user);
+
+    dispatch(setAuth(user));
+  };
+
+  const userLogin = () => {
+    loginWithRedirect()
+
+    if (user) {
+      dispatch(setAuth(user));
+    }
+  };
 
   return (
     <AppBar position="static">
+
       <Toolbar color="primary">
+
+        {auth ? (<h4>Authenticated</h4>):(<h4>Unauthenticated</h4>)}
+
+
         {isAuthenticated && (
           <>
             {/* <IconButton
@@ -72,12 +148,12 @@ const MainAppBar = ({ title }) => {
           <>
             {isAuthenticated ? (
               <>
-                <MeterStatusbar />
+                {/* <MeterStatusbar /> */}
                 <Card>
                   <CardHeader
                     style={{ padding: "4px" }}
                     avatar={
-                      <Avatar onClick={() => console.log("click")}>
+                      <Avatar onClick={(e, user) => showProfile(e, user)}>
                         {user.name.charAt(0).toUpperCase()}
                       </Avatar>
                     }
@@ -111,7 +187,7 @@ const MainAppBar = ({ title }) => {
                         className={classes.menuButton}
                         color="inherit"
                         aria-label="menu"
-                        onClick={() => loginWithRedirect()}
+                        onClick={userLogin}
                       >
                         <LoginIcon />
                       </IconButton>

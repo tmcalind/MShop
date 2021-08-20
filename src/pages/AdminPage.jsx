@@ -12,7 +12,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import MainAppBar from "../Components/MainAppBar";
+import AdminAppBar from "../Components/AdminAppBar";
 import MeterMap from "../Components/MeterMap";
 import MeterList from "../Components/MeterList";
 
@@ -67,8 +67,12 @@ const AdminPage = () => {
     <>
       {isLoading && <h1>Loading</h1>}
       {error && <h1>Oops... Something went wrong</h1>}
+
+
+
+
       <ThemeProvider theme={theme}>
-        <MainAppBar title="MeterShop Admin" />
+        <AdminAppBar title="MeterShop Admin" />
         <Container maxWidth="xl" style={{ paddingTop: "5px" }}>
           <Paper>
             {isAuthenticated ? (
