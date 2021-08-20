@@ -61,67 +61,53 @@ const AdminPage = () => {
 
   const objectIdList = useSelector((state) => state.feature.objectIdList);
 
-  const { isAuthenticated, isLoading, error } = useAuth0();
-
   return (
     <>
-      {isLoading && <h1>Loading</h1>}
-      {error && <h1>Oops... Something went wrong</h1>}
-
-
-
-
       <ThemeProvider theme={theme}>
         <AdminAppBar title="MeterShop Admin" />
         <Container maxWidth="xl" style={{ paddingTop: "5px" }}>
           <Paper>
-            {isAuthenticated ? (
-              <Grid container spacing={1}>
-                {objectIdList && objectIdList.length > 0 ? (
-                  <>
-                    <Grid item xs={5}>
+            <Grid container spacing={1}>
+              {objectIdList && objectIdList.length > 0 ? (
+                <>
+                  <Grid item xs={5}>
+                    <Card
+                      className={classes.card}
+                      variant="outlined"
+                      style={{ paddingLeft: "10px" }}
+                    >
+                      <MeterList />
+                    </Card>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <Card className={classes.card} variant="outlined">
+                      <MeterInfo />
                       <Card
                         className={classes.card}
                         variant="outlined"
-                        style={{ paddingLeft: "10px" }}
+                        style={{ padding: "5px" }}
                       >
-                        <MeterList />
+                        {" "}
+                        <MeterMap {...streetsMapConfig} />{" "}
                       </Card>
-                    </Grid>
-                    <Grid item xs={7}>
-                      <Card className={classes.card} variant="outlined">
-                        <MeterInfo />
-                        <Card
-                          className={classes.card}
-                          variant="outlined"
-                          style={{ padding: "5px" }}
-                        >
-                          {" "}
-                          <MeterMap {...streetsMapConfig} />{" "}
-                        </Card>
-                      </Card>
-                    </Grid>
-                  </>
-                ) : (
-                  <>
-                    <Grid item xs={12}>
-                      <Card
-                        className={classes.card}
-                        variant="outlined"
-                        style={{ paddingLeft: "10px" }}
-                      >
-                        <MeterInfo />
-                        <MeterMap {...streetsWideMapConfig} />
-                      </Card>
-                    </Grid>
-                  </>
-                )}
-              </Grid>
-            ) : (
-              <>
-                <h1>You are not logged in</h1>
-              </>
-            )}
+                    </Card>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid item xs={12}>
+                    <Card
+                      className={classes.card}
+                      variant="outlined"
+                      style={{ paddingLeft: "10px" }}
+                    >
+                      <MeterInfo />
+                      <MeterMap {...streetsWideMapConfig} />
+                    </Card>
+                  </Grid>
+                </>
+              )}
+            </Grid>
           </Paper>
         </Container>
       </ThemeProvider>
