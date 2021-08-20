@@ -16,7 +16,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const FieldAppBar = ({ title }) => {
+
     const classes = useStyles();
+    
     return (
         <AppBar position="static">
         <Toolbar color="primary">
@@ -28,5 +30,6 @@ const FieldAppBar = ({ title }) => {
       </AppBar>
     )
 }
+
 
 export default FieldAppBar

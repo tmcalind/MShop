@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { Avatar, Card, CardHeader, Toolbar } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import { FiLogIn as LoginIcon, FiLogOut as LogoutIcon } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +13,9 @@ import * as Cookies from "js-cookie";
 import { AUTH0_DOMAIN } from "../config";
 
 const useStyles = makeStyles((theme) => ({
-
   menuButton: {
     marginRight: theme.spacing(1),
   },
- 
 }));
 
 const UserStatus = () => {
@@ -46,9 +46,7 @@ const UserStatus = () => {
           const { user_metadata } = await metadataResponse.json();
 
           const roles = {
-            ...user_metadata,
-            admin: true,
-            field: false,
+            ...user_metadata
           };
 
           dispatch(setRoles(roles));
@@ -71,7 +69,7 @@ const UserStatus = () => {
     if (user) {
       getUserMetadata();
     }
-  }, [getAccessTokenSilently, user]);
+  }, [getAccessTokenSilently, user, dispatch]);
 
   const userLogin = () => {
     loginWithRedirect();
