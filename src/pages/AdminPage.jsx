@@ -17,8 +17,7 @@ import MeterList from "../Components/MeterList";
 
 import {
   streetsMapConfig,
-  streetsWideMapConfig,
-  basemapLondonMapConfig,
+  streetsWideMapConfig
 } from "../mapConfigs";
 import MeterInfo from "../Components/MeterInfo";
 
@@ -65,7 +64,7 @@ const AdminPage = () => {
       <ThemeProvider theme={theme}>
         <AdminAppBar title="MeterShop Admin" />
         <Container maxWidth="xl" style={{ paddingTop: "5px" }}>
-          <Paper>
+          <Paper style={{paddingLeft: "10px", paddingRight: "10px", paddingBottom: "10px"}}>
             <Grid container spacing={1}>
               {objectIdList && objectIdList.length > 0 ? (
                 <>
@@ -84,7 +83,7 @@ const AdminPage = () => {
                       <Card
                         className={classes.card}
                         variant="outlined"
-                        style={{ padding: "5px" }}
+                        style={{ padding: "10px" }}
                       >
                         {" "}
                         <MeterMap {...streetsMapConfig} />{" "}

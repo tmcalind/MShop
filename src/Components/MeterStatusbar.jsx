@@ -10,13 +10,20 @@ import Badge from "@material-ui/core/Badge";
 import { ImMeter as MeterIcon } from "react-icons/im";
 import { RiMailSendLine as SendLettersIcon } from "react-icons/ri";
 import { FcCancel as OnHoldIcon } from "react-icons/fc";
-
+import { makeStyles } from "@material-ui/core/styles";
 import { queryFeatures } from "@esri/arcgis-rest-feature-layer";
 import { WATER_METER_ADDRESSES_FEATURE_SERVER_URL } from "../config";
 
+const useStyles = makeStyles((theme) => ({
+  menuIcon: {
+    fontSize: 35
+  },
+}));
+
+
 const MeterStatusbar = () => {
   const dispatch = useDispatch();
-
+  const classes = useStyles();
   const getLettersDue = (letterPref) => {
     let whereClause = "";
 
@@ -123,33 +130,33 @@ const MeterStatusbar = () => {
     <Toolbar>
       <IconButton>
         <Badge badgeContent={2} color="secondary">
-          <MeterIcon color="#884DFF" />
+          <MeterIcon color="#884DFF" className={classes.menuIcon}/>
         </Badge>
       </IconButton>
       <IconButton>
         <Badge badgeContent={33} color="secondary">
-          <MeterIcon color="#AB274F" />
+          <MeterIcon color="#AB274F" className={classes.menuIcon}/>
         </Badge>
       </IconButton>
       <IconButton onClick={markedQueryHandler}>
         <Badge badgeContent={90} color="secondary">
-          <MeterIcon color="#1966FF" />
+          <MeterIcon color="#1966FF" className={classes.menuIcon}/>
         </Badge>
       </IconButton>
       <IconButton onClick={lettersDueHandler}>
         <Badge badgeContent={86} color="secondary">
-          <SendLettersIcon color="#E67300" />
+          <SendLettersIcon color="#E67300" className={classes.menuIcon}/>
         </Badge>
       </IconButton>
       <IconButton>
         <Badge badgeContent={2} color="secondary">
-          <SendLettersIcon color="#CC0000" />
+          <SendLettersIcon color="#CC0000" className={classes.menuIcon}/>
         </Badge>
       </IconButton>
 
       <IconButton>
         <Badge badgeContent={8} color="secondary">
-          <OnHoldIcon />
+          <OnHoldIcon className={classes.menuIcon}/>
         </Badge>
       </IconButton>
     </Toolbar>

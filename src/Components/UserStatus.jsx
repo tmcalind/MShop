@@ -46,7 +46,7 @@ const UserStatus = () => {
           const { user_metadata } = await metadataResponse.json();
 
           const roles = {
-            ...user_metadata
+            ...user_metadata,
           };
 
           dispatch(setRoles(roles));
@@ -100,7 +100,7 @@ const UserStatus = () => {
                 <LogoutIcon />
               </IconButton>
             }
-            title={auth.name}
+            // title={auth.name}
           />
         </Card>
       ) : (

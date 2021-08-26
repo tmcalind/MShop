@@ -33,7 +33,7 @@ import {
 } from "react-icons/gr";
 
 import PrintDialog from "./PrintDialog";
-import { AppBar, Grid } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -178,7 +178,11 @@ const Table = ({ columns, data }) => {
                 edge="start"
                 color="inherit"
               >
-                <Badge badgeContent={selectedFlatRows.length} color="primary">
+                <Badge 
+                  badgeContent={selectedFlatRows.length} 
+                  max={999} 
+                  color="primary"
+                >
                   <CheckboxSelectedIcon />
                 </Badge>
               </IconButton>

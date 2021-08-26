@@ -15,6 +15,7 @@ import {
       },
       setObjectIdList: (state, action) => {
         state.objectIdList = action.payload;
+        state.objectIdListSelected = [];
       },
       setObjectIdListSelected: (state, action) => {
         state.objectIdListSelected = action.payload;

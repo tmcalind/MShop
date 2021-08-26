@@ -159,7 +159,7 @@ const MeterInfo = () => {
               <Card
                 className={classes.card}
                 variant="outlined"
-                style={{ paddingLeft: "10px" }}
+                style={{ paddingLeft: "10px", paddingRight: "10px", paddingBottom: "10px" }}
               >
                 <CardHeader
                   avatar={<MeterAvatarIcon status={meter.Status} />}
@@ -185,7 +185,7 @@ const MeterInfo = () => {
                     </>
                   }
                 />
-                <CardContent>
+                {/* <CardContent> */}
                   <Grid container spacing={1}>
                     <Grid item xs={4}>
                       <Card>
@@ -203,7 +203,7 @@ const MeterInfo = () => {
                       </Card>
                     </Grid>
                   </Grid>
-                </CardContent>
+                {/* </CardContent> */}
               </Card>
             </Grid>
           </Grid>

@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { setObjectId } from "../slices/featureSlice";
 import { setCenterscale } from "../slices/mapviewSlice";
 
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import WebMap from "@arcgis/core/WebMap";
 
 import UniqueValueRenderer from "@arcgis/core/renderers/UniqueValueRenderer";
@@ -20,15 +20,12 @@ import {
   WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
 } from "../config";
 
-const MeterMap = ({ basemap, height, width, center, scale }) => {
+const FieldMap = ({ basemap, height, width, center, scale }) => {
   esriConfig.assetsPath = ESRI_CONFIG_ASSETS_PATH;
   esriConfig.portalUrl = ESRI_CONFIG_PORTAL_URL;
   esriConfig.apiKey = ESRI_CONFIG_API_KEY;
 
-  const objectIdList = useSelector((state) => state.feature.objectIdList);
-  const objectIdListSelected = useSelector(
-    (state) => state.feature.objectIdListSelected
-  );
+  const objectId = useSelector((state) => state.feature.objectId);
 
   const mapDiv = useRef(null);
 
@@ -179,6 +176,36 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
         ],
       });
 
+      let waterMeterLabelArcade = "var meterNumberLine = $feature.METERNUMBER;";
+      waterMeterLabelArcade +=
+        "var premiseAddressLine = $feature.PREMISEADDRESS;";
+      waterMeterLabelArcade += "var installed = $feature.INSTALLDATE;";
+      waterMeterLabelArcade +=
+        "var inServiceYears = DateDiff(Now(), installed, 'years');";
+      waterMeterLabelArcade +=
+        "var inServiceLine = 'In service ' + Round(inServiceYears) + ' yrs';";
+      waterMeterLabelArcade +=
+        "var labels = [ meterNumberLine, premiseAddressLine, inServiceLine ];";
+      waterMeterLabelArcade +=
+        "return Concatenate(labels, TextFormatting.NewLine);";
+
+      const waterMeterLabelingInfo = {
+        labelExpressionInfo: {
+          expression: waterMeterLabelArcade,
+        },
+        labelPlacement: "center-right",
+        symbol: {
+          type: "text", // autocasts as new TextSymbol()
+          font: {
+            size: 9,
+            family: "Noto Sans",
+          },
+          horizontalAlignment: "left",
+          color: "#2b2b2b",
+        },
+        minScale: 6000,
+      };
+
       const waterMetersFeatureLayer = new FeatureLayer({
         url: WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
         spatialReference: 26917,
@@ -194,94 +221,21 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
           "PremiseAddress",
         ],
         renderer: waterMeterRenderer,
-        minScale: 12000,
+        labelingInfo: [waterMeterLabelingInfo],
+        minScale: 50000,
+        definitionExpression: "Status = 'Scheduled'",
       });
 
       mapRef.current.add(waterMetersFeatureLayer);
 
-      const objectIdListGraphicsLayer = new GraphicsLayer();
-      mapRef.current.add(objectIdListGraphicsLayer);
-
-      const objectIdListSelectedGraphicsLayer = new GraphicsLayer();
-      mapRef.current.add(objectIdListSelectedGraphicsLayer);
-
-      view.whenLayerView(waterMetersFeatureLayer).then(function () {
-        objectIdListGraphicsLayer.removeAll();
-
-        if (objectIdList && objectIdList.length > 0) {
-          const query = waterMetersFeatureLayer.createQuery();
-          query.objectIds = objectIdList;
-
-          waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
-            const symbolizedFeatureSet = featureSet.features.map((graphic) => {
-              let symbolUrl = "./mshop/assets/WaterMeter_Marked.png";
-
-              if (graphic.attributes.Status === "InService") {
-                symbolUrl = "./mshop/assets/WaterMeter_InService.png";
-              } else if (graphic.attributes.Status === "Letter1") {
-                symbolUrl = "./mshop/assets/WaterMeter_Letter1.png";
-              } else if (graphic.attributes.Status === "Letter2") {
-                symbolUrl = "./mshop/assets/WaterMeter_Letter2.png";
-              } else if (graphic.attributes.Status === "Letter3") {
-                symbolUrl = "./mshop/assets/WaterMeter_Letter3.png";
-              } else if (graphic.attributes.Status === "Letter4") {
-                symbolUrl = "./mshop/assets/WaterMeter_Letter4.png";
-              } else if (graphic.attributes.Status === "Scheduled") {
-                symbolUrl = "./mshop/assets/WaterMeter_Scheduled.png";
-              }
-
-              graphic.symbol = {
-                type: "picture-marker",
-                url: symbolUrl,
-                width: "40px",
-                height: "25px",
-              };
-
-              return graphic;
-            });
-            objectIdListGraphicsLayer.graphics.addMany(symbolizedFeatureSet);
-
-            // console.log(`waterMetersFeatureLayer.queryFeatures`,featureSet)
-
-            // Zoom to list items
-            // view.goTo(objectIdListGraphicsLayer.graphics).catch((err) => console.log(err));
-          });
-        }
-
-        objectIdListSelectedGraphicsLayer.removeAll();
-        
-        if (objectIdListSelected && objectIdListSelected.length > 0) {
-          const query = waterMetersFeatureLayer.createQuery();
-
-          query.objectIds = objectIdListSelected;
-
-          waterMetersFeatureLayer.queryFeatures(query).then((featureSet) => {
-            const symbolizedFeatureSet = featureSet.features.map((graphic) => {
-              graphic.symbol = {
-                type: "simple-marker",
-                style: "diamond",
-                size: 10,
-                color: "red",
-              };
-
-              return graphic;
-            });
-
-            objectIdListSelectedGraphicsLayer.graphics.addMany(
-              symbolizedFeatureSet
-            );
-          });
-        }
-
-        view.on("click", function (event) {
-
-// Zoom to list items
-            view.goTo(objectIdListGraphicsLayer.graphics).catch((err) => console.log(err));
-
-          view.hitTest(event).then(function (event) {
+      view.whenLayerView(waterMetersFeatureLayer).then(() => {
+        view.on("click", (event) => {
+          view.hitTest(event).then((event) => {
             if (event.results) {
-              event.results.forEach(function (result) {
+              event.results.forEach((result) => {
                 if (result.graphic.layer.name === "WaterMeters") {
+                  // view.goTo(waterMetersFeatureLayer.fe);
+                  // console.log(result.graphic)
                   const attribs = result.graphic.attributes;
                   dispatch(setObjectId(attribs.OBJECTID));
 
@@ -299,16 +253,7 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
         });
       });
     }
-  }, [
-    objectIdList,
-    objectIdListSelected,
-    dispatch,
-    basemap,
-    height,
-    width,
-    center,
-    scale,
-  ]);
+  }, [dispatch, basemap, height, width, center, scale]);
 
   return (
     <>
@@ -317,4 +262,4 @@ const MeterMap = ({ basemap, height, width, center, scale }) => {
   );
 };
 
-export default MeterMap;
+export default FieldMap;

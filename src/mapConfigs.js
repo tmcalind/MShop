@@ -1,15 +1,15 @@
 export const streetsMapConfig = {
     basemap: 'streets',
-    width: '900px',
-    height: '600px',
+    width: '1050px',
+    height: '700px',
     center: [-81.2410, 42.9848],
     scale: 25000
 }
 
 export const streetsWideMapConfig = {
     basemap: 'streets',
-    width: '1300px',
-    height: '600px',
+    width: '1850px',
+    height: '700px',
     center: [-81.2410, 42.9848],
     scale: 25000
 }
