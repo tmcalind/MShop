@@ -10,3 +10,5 @@ export const WATER_METER_ADDRESSES_FEATURE_SERVER_URL = "https://citymapdev.corp
 export const ESRI_CONFIG_ASSETS_PATH = "./mshop/assets";
 export const ESRI_CONFIG_PORTAL_URL = "https://citymapdev.corp.city.london.ca/portal"
 export const ESRI_CONFIG_API_KEY = "AAPK712c62260c8c40da8b45d9af14cd23cauLe1BPadiNcSGdCOsVg4_hVVZcbgPGi6Kpvzck0gr7jOjdy4mnZDRFmD2FtTYHzB"
+
+export const ASSETS_BASEURL = "http://localhost:3000/mshop"

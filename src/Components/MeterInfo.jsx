@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setObjectId } from "../slices/featureSlice";
+import { setObjectId, setObjectIdSelected } from "../slices/featureSlice";
 
 import { queryFeatures } from "@esri/arcgis-rest-feature-layer";
 import { alpha, makeStyles } from "@material-ui/core/styles";
@@ -9,7 +9,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import { FiX as ClearIcon } from "react-icons/fi";
+import { FiX as ClearIcon, FiMap as MapIcon } from "react-icons/fi";
 import {
   GrScheduleNew as ScheduleIcon,
   GrDocumentUpdate as UpdateIcon,
@@ -19,8 +19,6 @@ import {
 
 import { WATER_METER_ADDRESSES_FEATURE_SERVER_URL } from "../config";
 import CardContent from "@material-ui/core/CardContent";
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
   largeavatar: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
   search: {
     position: "relative",
@@ -132,7 +133,7 @@ const MeterInfo = () => {
   const [meter, setMeter] = useState(null);
 
   const objectId = useSelector((state) => state.feature.objectId);
-
+  // const objectIdSelected = useSelector((state) => state.feature.objectIdSelected);
 
   useEffect(() => {
     // fetch feature info
@@ -144,10 +145,15 @@ const MeterInfo = () => {
         setMeter(response.features[0].attributes);
       });
     }
+
   }, [objectId]);
 
+  const mapGoToClickHandler = () => {
+    dispatch(setObjectIdSelected(meter.OBJECTID))
+  }
+
   const clearClickHandler = () => {
-    dispatch(setObjectId(null))
+    dispatch(setObjectId(null));
   }
 
   return (
@@ -159,7 +165,11 @@ const MeterInfo = () => {
               <Card
                 className={classes.card}
                 variant="outlined"
-                style={{ paddingLeft: "10px", paddingRight: "10px", paddingBottom: "10px" }}
+                style={{
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                  paddingBottom: "10px",
+                }}
               >
                 <CardHeader
                   avatar={<MeterAvatarIcon status={meter.Status} />}
@@ -167,6 +177,14 @@ const MeterInfo = () => {
                   subheader={meter.MeterType + " by " + meter.Manufacturer}
                   action={
                     <>
+                      <IconButton
+                        onClick={mapGoToClickHandler}
+                        className={classes.menuButton}
+                        edge="start"
+                        color="inherit"
+                      >
+                        <MapIcon />
+                      </IconButton>
                       <IconButton>
                         <PrintIcon />
                       </IconButton>
@@ -185,25 +203,24 @@ const MeterInfo = () => {
                     </>
                   }
                 />
-                {/* <CardContent> */}
-                  <Grid container spacing={1}>
-                    <Grid item xs={4}>
-                      <Card>
-                        <CardContent>{meter.InstallDate}</CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Card>
-                        <CardContent>{meter.PremiseAddress}</CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Card>
-                        <CardContent>{meter.Status}</CardContent>
-                      </Card>
-                    </Grid>
+
+                <Grid container spacing={1}>
+                  <Grid item xs={4}>
+                    <Card>
+                      <CardContent>{meter.InstallDate}</CardContent>
+                    </Card>
                   </Grid>
-                {/* </CardContent> */}
+                  <Grid item xs={4}>
+                    <Card>
+                      <CardContent>{meter.PremiseAddress}</CardContent>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Card>
+                      <CardContent>{meter.Status}</CardContent>
+                    </Card>
+                  </Grid>
+                </Grid>
               </Card>
             </Grid>
           </Grid>
@@ -211,11 +228,9 @@ const MeterInfo = () => {
       ) : (
         <>
           <Grid container spacing={0}>
-            <Grid item xs={4}>
-            </Grid>
             <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
-            </Grid>
+            <Grid item xs={4}></Grid>
+            <Grid item xs={4}></Grid>
           </Grid>
         </>
       )}

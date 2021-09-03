@@ -6,12 +6,17 @@ import {
     name: 'feature',
     initialState: {
       objectId: null,
+      objectIdSelected: null,
       objectIdList: [],
       objectIdListSelected: []
     },
     reducers: {
       setObjectId: (state, action) => {
         state.objectId = action.payload;
+        state.objectIdSelected = null;
+      },
+      setObjectIdSelected: (state, action) => {
+        state.objectIdSelected = action.payload;
       },
       setObjectIdList: (state, action) => {
         state.objectIdList = action.payload;
@@ -25,6 +30,7 @@ import {
   
   export const {
     setObjectId,
+    setObjectIdSelected,
     setObjectIdList,
     setObjectIdListSelected
   } = featureSlice.actions;

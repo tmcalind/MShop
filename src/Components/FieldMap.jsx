@@ -234,8 +234,6 @@ const FieldMap = ({ basemap, height, width, center, scale }) => {
             if (event.results) {
               event.results.forEach((result) => {
                 if (result.graphic.layer.name === "WaterMeters") {
-                  // view.goTo(waterMetersFeatureLayer.fe);
-                  // console.log(result.graphic)
                   const attribs = result.graphic.attributes;
                   dispatch(setObjectId(attribs.OBJECTID));
 
