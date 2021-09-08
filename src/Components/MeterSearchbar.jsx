@@ -5,6 +5,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputBase from "@material-ui/core/InputBase";
 
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
@@ -45,10 +48,83 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const isWaterMeter = (searchTerm) => {
+  let result = false;
+  if (searchTerm.charAt(0).toUpperCase() === "W") {
+    result = true;
+  }
+
+  return result;
+};
+
+const isAddress = (searchTerm) => {
+  let result = false;
+
+  const hasPos = searchTerm.indexOf(" ") > -1;
+  if (hasPos) {
+    const items = searchTerm.split(" ");
+    if (items.length > 1) {
+      if (items[0].valueOf() > 0) {
+        result = true;
+      }
+    }
+  }
+
+  return result;
+};
+
+
+
+
+
+
 const MeterSearchbar = () => {
   const classes = useStyles();
 
-  const [searchTerm, setSearchTerm] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('W');
+
+  const getSomeMeters = (partialMeterNumber) => {
+    console.log(`partialMeterNumber`, partialMeterNumber)
+    return someMeters;
+  }
+
+  const [ partialMeterList, setPartialMeterList ] = useState([]);
+
+  const searchTermChangeHandler = (e) => {
+
+    setSearchTerm(e.target.value);
+    
+
+    if (isWaterMeter(e.target.value)) {
+
+      console.log("isWaterMeter", e.target.value, searchTerm);
+
+      // queryFeatures({
+      //   url: WATER_METER_ADDRESSES_FEATURE_SERVER_URL,
+      //   where: "Status = 'Marked'",
+      // }).then((response) => {
+      //   const objIds = response.features.map((item) => item.attributes.OBJECTID);
+      //   dispatch(setObjectIdList(objIds));
+  
+      //   dispatch(setObjectIdListSelected([]));
+      // });
+
+
+
+    } else if (isAddress(e.target.value)) {
+      console.log("isAddress", e.target.value);
+    } else {
+      console.log("unknown");
+    }
+  };
+
+  const someMeters = [
+    { MeterNumber: 'W12345'},
+    { MeterNumber: 'W12000'},
+    { MeterNumber: 'W12145'},
+    { MeterNumber: 'W12245'}
+  ]
+
 
   return (
     <Toolbar>
@@ -57,7 +133,7 @@ const MeterSearchbar = () => {
           <SearchIcon />
         </div>
         <InputBase
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={searchTermChangeHandler}
           placeholder="Meter # or Address"
           classes={{
             root: classes.inputRoot,
@@ -65,9 +141,19 @@ const MeterSearchbar = () => {
           }}
           inputProps={{ "aria-label": "search" }}
         />
+        <Autocomplete
+          value={searchTerm}
+          options={someMeters}
+          getOptionLabel={(option) => option.MeterNumber}
+          style={{ width: 300 }}
+          renderInput={(params) => (
+            <TextField {...params} label="Combo box" variant="outlined" />
+          )}
+        />
       </div>
     </Toolbar>
   );
 };
 
 export default MeterSearchbar;
+

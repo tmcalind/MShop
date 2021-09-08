@@ -13,7 +13,6 @@ import {
     reducers: {
       setObjectId: (state, action) => {
         state.objectId = action.payload;
-        state.objectIdSelected = null;
       },
       setObjectIdSelected: (state, action) => {
         state.objectIdSelected = action.payload;

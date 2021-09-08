@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 
-import MainAppBar from '../Components/MainAppBar'
+import MainAppBar from "../Components/MainAppBar";
 
-const LandingPage = () => {
-    return (
-        <>
-        <MainAppBar title="MeterShop Home" />
-      
-        </>
-    )
-}
+const LandingPage = ({ message }) => {
+  return (
+    <>
+      <MainAppBar title="MeterShop Home" />
+      <h4>{message}</h4>
+    </>
+  );
+};
 
-export default LandingPage
+export default LandingPage;

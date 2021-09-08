@@ -52,10 +52,21 @@ function App() {
             <Grid item xs={12}>
               {auth ? (
               <>
+                {!roles.admin && !roles.field ? (
+                <LandingPage 
+                  message="You are authenticated but have not been assigned a role. Contact MeterShop Admin" 
+                />
+                ) : (
+                <>
                 {roles.admin ? <AdminPage /> 
-                          : <FieldPage />}
+                             : <FieldPage />}
+                </>
+                )}               
               </>
-              ) : (<LandingPage />) }            
+              ) : (
+              <LandingPage 
+                message="Welcome to MeterShop. Login to begin." 
+              />) }            
             </Grid>
           </Grid>         
         </div>

@@ -23,7 +23,7 @@ const letter2Orange = [255, 187, 51];
 const letter3OrangeRed = [255, 153, 102];
 const letter4RedOrange = [255, 143, 80];
 const scheduledBlack = [0, 0, 0];
-const symbolOpacity = 0.1;
+const symbolOpacity = 1.0;
 const symbolSize = 8;
 const symbolOutlineWidth = 3;
 
